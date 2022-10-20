@@ -115,7 +115,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@android:color/background_dark"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:focusable="false"
             android:hint="Pilih tanggal..."
             android:textColor="@color/black" />
 

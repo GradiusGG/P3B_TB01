@@ -13,10 +13,11 @@ import com.example.tb01.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainPresenter.MainUI{
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
     private FragmentManager manager;
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
         this.binding = ActivityMainBinding.inflate(this.getLayoutInflater());
         this.fragments = new HashMap<>();
         this.manager = this.getSupportFragmentManager();
+        this.presenter = new MainPresenter(this);
 
         setContentView(R.layout.activity_main);
 
         // Buat fragments
         this.fragments.put("home", new HomeFragment());
-        this.fragments.put("appointment", new AppointmentFragment());
+        this.fragments.put("appointment", AppointmentFragment.newInstance(this.presenter));
 
         // Listener
         this.manager.setFragmentResultListener("changePage", this,
@@ -73,5 +75,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         ft.commit();
+    }
+
+    @Override
+    public void setAppointmentDate(String text) {
+        AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("appointment");
+        fragment.setEtDate(text);
     }
 }
