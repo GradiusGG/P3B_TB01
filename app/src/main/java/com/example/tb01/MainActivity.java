@@ -1,6 +1,7 @@
 package com.example.tb01;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,11 +31,17 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         this.manager = this.getSupportFragmentManager();
         this.presenter = new MainPresenter(this);
 
-        setContentView(R.layout.activity_main);
+        setContentView(this.binding.getRoot());
 
         // Buat fragments
         this.fragments.put("home", new HomeFragment());
         this.fragments.put("appointment", AppointmentFragment.newInstance(this.presenter));
+
+        // Drawer
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.binding.drawerLayout,
+                this.binding.toolbar, R.string.open_drawer, R.string.close_drawer);
+        this.binding.drawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
 
         // Listener
         this.manager.setFragmentResultListener("changePage", this,
