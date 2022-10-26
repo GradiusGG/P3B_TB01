@@ -2,6 +2,6 @@
     <string name="app_name">TB01</string>
     <string name="hospital_name">RS Cepat Kembali</string>
     <string name="button_home_text">Buat Pertemuan</string>
-
+    <string name="btn_save_text">Simpan</string>
     <string name="desc_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt nibh eget maximus porta. Mauris iaculis dolor finibus nunc aliquet imperdiet. </string>
 </resources>

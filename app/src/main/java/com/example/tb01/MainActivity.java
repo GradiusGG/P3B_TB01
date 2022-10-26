@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tb01.databinding.ActivityMainBinding;
 
@@ -81,5 +82,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     public void setAppointmentDate(String text) {
         AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("appointment");
         fragment.setEtDate(text);
+    }
+
+    @Override
+    public void setAppointmentTime(String text) {
+        AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("appointment");
+        fragment.setEtTime(text);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tb01;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -47,6 +49,7 @@ public class AppointmentFragment extends Fragment {
 
         // Listeners
         this.binding.etDate.setOnClickListener(this::onDateClick);
+        this.binding.etTime.setOnClickListener(this::onTimeClick);
 
         return view;
     }
@@ -57,16 +60,34 @@ public class AppointmentFragment extends Fragment {
         int currMonth = calendar.get(Calendar.MONTH);
         int currDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this.getContext(), this::onDateSet,
-                currYear, currMonth, currDay);
-        datePickerDialog.show();
+        DatePickerDialog dialog = new DatePickerDialog(this.getContext(), this::onDateSet, currYear,
+                currMonth, currDay);
+        dialog.show();
     }
 
     private void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
         this.presenter.setEtDate(year, month, dayOfMonth);
     }
 
+    private void onTimeClick(View view){
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog dialog = new TimePickerDialog(this.getContext(), this::onTimeSet, hour,
+                minute, true);
+        dialog.show();
+    }
+
+    private void onTimeSet(TimePicker view, int hourOfDay, int minute){
+        this.presenter.setEtTime(hourOfDay, minute);
+    }
+
     public void setEtDate(String text){
         this.binding.etDate.setText(text);
+    }
+
+    public void setEtTime(String text){
+        this.binding.etTime.setText(text);
     }
 }

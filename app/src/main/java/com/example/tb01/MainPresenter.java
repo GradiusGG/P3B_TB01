@@ -8,11 +8,18 @@ public class MainPresenter {
     }
 
     public void setEtDate(int year, int month, int dayOfMonth){
-        String dateString = dayOfMonth+"/"+month+"/"+year;
+        String dateString = String.format("%02d/$02d/%04d", dayOfMonth, month, year);
         this.ui.setAppointmentDate(dateString);
+    }
+    
+    public void setEtTime(int hourOfDay, int minute){
+        String timeString = String.format("%02d:%02d", hourOfDay, minute);
+        this.ui.setAppointmentTime(timeString);
     }
 
     public interface MainUI{
         void setAppointmentDate(String text);
+
+        void setAppointmentTime(String text);
     }
 }

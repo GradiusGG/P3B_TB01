@@ -123,4 +123,42 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Waktu :"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="@dimen/form_font_size" />
+
+        <EditText
+            android:id="@+id/et_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/background_dark"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:drawableEnd="@android:drawable/ic_menu_recent_history"
+            android:focusable="false"
+            android:hint="Pilih waktu..."
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/silver"
+        android:text="@string/btn_save_text"
+        android:textColor="@color/black" />
 </LinearLayout>
