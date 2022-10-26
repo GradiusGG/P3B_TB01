@@ -2,6 +2,7 @@ package com.example.tb01;
 
 public class MainPresenter {
     private MainUI ui;
+    public static String[] navMenuArray = {"Home", "Pertemuan ", "Dokter", "Exit"};
 
     public MainPresenter(MainUI ui){
         this.ui = ui;

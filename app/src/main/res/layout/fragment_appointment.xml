@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buat Pertemuan"
+        android:text="@string/appoint_title"
         android:textSize="@dimen/title_size"
         android:textStyle="bold" />
 
@@ -23,15 +23,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Nama :"
-            android:textAlignment="textEnd"
+            android:text="Nama"
+            android:textAlignment="textStart"
             android:textSize="@dimen/form_font_size" />
 
-        <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="@dimen/form_font_size" />
+
+        <EditText android:inputType="text"
             android:id="@+id/et_patient_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:hint="Nama Lengkap" />
 
     </LinearLayout>
 
@@ -46,14 +53,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Dokter :"
-            android:textAlignment="textEnd"
+            android:text="Dokter"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/form_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
             android:textSize="@dimen/form_font_size" />
 
         <Spinner
             android:id="@+id/spinner_doctor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45sp"
             android:layout_weight="1"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
@@ -64,23 +77,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:layout_weight="2"
-            android:text="Keluhan :"
-            android:textAlignment="textEnd"
+            android:text="Keluhan"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/form_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text=":"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
             android:id="@+id/et_complaint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1"
+            android:gravity="top"
+            android:hint="Ceritakan keluhan Anda..."
+            android:inputType="textMultiLine"
+            android:lines="6" />
     </LinearLayout>
 
     <LinearLayout
@@ -94,8 +117,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Tanggal :"
-            android:textAlignment="textEnd"
+            android:text="Tanggal"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/form_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
@@ -107,7 +136,7 @@
             android:cursorVisible="false"
             android:drawableEnd="@android:drawable/ic_menu_my_calendar"
             android:focusable="false"
-            android:hint="Pilih tanggal..." />
+            android:hint="Pilih tanggal" />
 
     </LinearLayout>
 
@@ -122,8 +151,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Waktu :"
-            android:textAlignment="textEnd"
+            android:text="Waktu"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/form_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
@@ -135,12 +170,21 @@
             android:cursorVisible="false"
             android:drawableEnd="@android:drawable/ic_menu_recent_history"
             android:focusable="false"
-            android:hint="Pilih waktu..."/>
+            android:hint="Pilih jam" />
+
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/btn_save_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Simpan" />
+
+    </LinearLayout>
+
 </LinearLayout>

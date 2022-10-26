@@ -22,7 +22,8 @@
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:background="?android:colorBackground"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -31,11 +32,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="start" >
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.example.tb01.LeftDrawerFragment"/>
+            android:name="com.example.tb01.NavDrawerFragment"/>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

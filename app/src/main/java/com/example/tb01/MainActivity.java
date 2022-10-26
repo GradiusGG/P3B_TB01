@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Inisialisasi
+        // Inisialisasi atribut
         this.binding = ActivityMainBinding.inflate(this.getLayoutInflater());
         this.fragments = new HashMap<>();
         this.manager = this.getSupportFragmentManager();
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragmentHome = this.fragments.get("home");
         Fragment fragmentAppointment = this.fragments.get("appointment");
+        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         if(page == 1){
             if(fragmentHome.isAdded()){
                 ft.show(fragmentHome);
