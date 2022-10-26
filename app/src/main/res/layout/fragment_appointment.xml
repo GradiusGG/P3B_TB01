@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Buat Pertemuan"
-        android:textColor="@color/black"
         android:textSize="@dimen/title_size"
         android:textStyle="bold" />
 
@@ -26,17 +25,13 @@
             android:layout_weight="2"
             android:text="Nama :"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
             android:id="@+id/et_patient_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/background_dark"
-
-            android:textColor="@color/black" />
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
@@ -53,7 +48,6 @@
             android:layout_weight="2"
             android:text="Dokter :"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
             android:textSize="@dimen/form_font_size" />
 
         <Spinner
@@ -62,8 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            android:textColor="@color/black" />
+            android:spinnerMode="dropdown" />
 
     </LinearLayout>
 
@@ -80,16 +73,13 @@
             android:layout_weight="2"
             android:text="Keluhan :"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
             android:id="@+id/et_complaint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/background_dark"
-            android:textColor="@color/black" />
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
@@ -106,7 +96,6 @@
             android:layout_weight="2"
             android:text="Tanggal :"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
@@ -114,13 +103,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/background_dark"
             android:clickable="false"
             android:cursorVisible="false"
             android:drawableEnd="@android:drawable/ic_menu_my_calendar"
             android:focusable="false"
-            android:hint="Pilih tanggal..."
-            android:textColor="@color/black" />
+            android:hint="Pilih tanggal..." />
 
     </LinearLayout>
 
@@ -137,7 +124,6 @@
             android:layout_weight="2"
             android:text="Waktu :"
             android:textAlignment="textEnd"
-            android:textColor="@color/black"
             android:textSize="@dimen/form_font_size" />
 
         <EditText
@@ -145,13 +131,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/background_dark"
             android:clickable="false"
             android:cursorVisible="false"
             android:drawableEnd="@android:drawable/ic_menu_recent_history"
             android:focusable="false"
-            android:hint="Pilih waktu..."
-            android:textColor="@color/black" />
+            android:hint="Pilih waktu..."/>
     </LinearLayout>
 
     <Button
