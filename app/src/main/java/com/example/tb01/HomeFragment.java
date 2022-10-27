@@ -1,6 +1,7 @@
 package com.example.tb01;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,8 @@ public class HomeFragment extends Fragment {
 
     private void onClick(View view){
         Bundle result = new Bundle();
-        result.putInt("page", 2);
+        result.putString("page", "pertemuan");
+        Log.d("debug", "method onclik homefrag: "+result.get("page"));
         this.manager.setFragmentResult("changePage", result);
     }
 }

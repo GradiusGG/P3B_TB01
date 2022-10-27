@@ -20,8 +20,7 @@ public class NavDrawerFragment extends Fragment {
     private FragmentNavDrawerBinding binding;
     private FragmentManager manager;
 
-    public NavDrawerFragment() {
-    }
+    public NavDrawerFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +32,7 @@ public class NavDrawerFragment extends Fragment {
 
         // Populate list
         ListView navlist = this.binding.listDrawer;
-        navlist.setAdapter((new ArrayAdapter<String>(this.getContext(), R.layout.nav_item,
+        navlist.setAdapter((new ArrayAdapter<String>(this.getContext(), R.layout.item_nav,
                 MainPresenter.navMenuArray)));
 
         // Click listener
@@ -41,7 +40,11 @@ public class NavDrawerFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tv = (TextView) view;
-                Log.d("debug", tv.getText().toString());
+                String page = tv.getText().toString().toLowerCase();
+                Bundle bundle = new Bundle();
+                bundle.putString("page", page);
+                Log.d("debug", page);
+                manager.setFragmentResult("changePage", bundle);
             }
         });
 

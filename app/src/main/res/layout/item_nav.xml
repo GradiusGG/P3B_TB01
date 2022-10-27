@@ -3,5 +3,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/nav_text_size"
-    android:text="@string/appoint_title"
     android:textSize="@dimen/nav_text_size" />

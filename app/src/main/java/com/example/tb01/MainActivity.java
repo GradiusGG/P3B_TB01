@@ -8,14 +8,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.tb01.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.MainUI{
+public class MainActivity extends AppCompatActivity implements MainPresenter.MainUI {
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
     private FragmentManager manager;
@@ -34,8 +36,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         setContentView(this.binding.getRoot());
 
         // Buat fragments
+        /* Beberapa key dalam bahasa indonesia supaya perpindahan page lebih mudah (hubungannya dengan
+           text pada navigator drawer)
+         */
         this.fragments.put("home", new HomeFragment());
-        this.fragments.put("appointment", AppointmentFragment.newInstance(this.presenter));
+        this.fragments.put("pertemuan", AppointmentFragment.newInstance(this.presenter));
+        this.fragments.put("dokter", DoctorFragment.newInstance(this.presenter));
 
         // Drawer
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.binding.drawerLayout,
@@ -48,53 +54,73 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
                 new FragmentResultListener() {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                        int page = result.getInt("page");
+                        String page = result.getString("page");
                         changePage(page);
                     }
                 });
 
         // Set halaman pertama
-        this.changePage(1);
+        this.changePage("home");
     }
 
-    public void changePage(int page){
+    public void changePage(String page) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Fragment fragmentHome = this.fragments.get("home");
-        Fragment fragmentAppointment = this.fragments.get("appointment");
         ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        if(page == 1){
-            if(fragmentHome.isAdded()){
-                ft.show(fragmentHome);
-            }else{
-                ft.add(this.binding.fragmentContainer.getId(), fragmentHome);
-            }
-
-            if(fragmentAppointment.isAdded()){
-                ft.hide(fragmentAppointment);
-            }
-        }else if(page == 2){
-            if(fragmentAppointment.isAdded()){
-                ft.show(fragmentAppointment);
-            }else{
-                ft.add(this.binding.fragmentContainer.getId(), fragmentAppointment).addToBackStack(null);
-            }
-
-            if(fragmentHome.isAdded()){
-                ft.hide(fragmentHome);
-            }
+        try {
+            ft.replace(this.binding.fragmentContainer.getId(), this.fragments.get(page));
+        } catch (NullPointerException e) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Halaman Tidak Ditemukan")
+                    .setMessage("Halaman yang di-request tidak ditemukan.")
+                    .setPositiveButton("OK", null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
+
         ft.commit();
+
+//        Fragment fragmentHome = this.fragments.get("home");
+//        Fragment fragmentAppointment = this.fragments.get("pertemuan");
+//        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+//        if (page == 1) {
+//            if (fragmentHome.isAdded()) {
+//                ft.show(fragmentHome);
+//            } else {
+//                ft.add(this.binding.fragmentContainer.getId(), fragmentHome);
+//            }
+//
+//            if (fragmentAppointment.isAdded()) {
+//                ft.hide(fragmentAppointment);
+//            }
+//        } else if (page == 2) {
+//            if (fragmentAppointment.isAdded()) {
+//                ft.show(fragmentAppointment);
+//            } else {
+//                ft.add(this.binding.fragmentContainer.getId(), fragmentAppointment).addToBackStack(null);
+//            }
+//
+//            if (fragmentHome.isAdded()) {
+//                ft.hide(fragmentHome);
+//            }
+//        }
+
     }
 
     @Override
     public void setAppointmentDate(String text) {
-        AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("appointment");
+        AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("pertemuan");
         fragment.setEtDate(text);
     }
 
     @Override
     public void setAppointmentTime(String text) {
-        AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("appointment");
+        AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("pertemuan");
         fragment.setEtTime(text);
+    }
+
+    @Override
+    public void updateDoctorList(ArrayList<Doctor> doctors) {
+        DoctorFragment fragment = (DoctorFragment) this.fragments.get("dokter");
+        fragment.updateDoctorList(doctors);
     }
 }

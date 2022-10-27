@@ -43,7 +43,7 @@ public class AppointmentFragment extends Fragment {
         View view = this.binding.getRoot();
 
         Spinner doctorSelect = this.binding.spinnerDoctor;
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(doctorSelect.getContext(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(doctorSelect.getContext(),
                 android.R.layout.simple_spinner_dropdown_item, doctorNames);
         doctorSelect.setAdapter(adapter);
 
