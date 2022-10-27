@@ -46,7 +46,9 @@ public class DoctorFragment extends Fragment {
     }
 
     private void onBtnAddClick(View view) {
-
+        Bundle result = new Bundle();
+        result.putString("page", "add");
+        this.manager.setFragmentResult("changePage", result);
     }
 
     public void updateDoctorList(ArrayList<Doctor> doctorList){

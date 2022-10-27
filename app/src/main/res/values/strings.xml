@@ -12,6 +12,6 @@
     <!--  Appointment  -->
     <string name="appoint_title">Buat Pertemuan</string>
 
-
-
+    <!--    Add Doctor-->
+    <string name="add_title_text">Tambah Dokter</string>
 </resources>

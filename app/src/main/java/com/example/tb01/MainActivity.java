@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         this.fragments.put("home", new HomeFragment());
         this.fragments.put("pertemuan", AppointmentFragment.newInstance(this.presenter));
         this.fragments.put("dokter", DoctorFragment.newInstance(this.presenter));
+        this.fragments.put("add", AddDoctorFragment.newInstance(this.presenter));
 
         // Drawer
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.binding.drawerLayout,
