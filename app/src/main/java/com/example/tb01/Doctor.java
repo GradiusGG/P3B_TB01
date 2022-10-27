@@ -10,7 +10,7 @@ public class Doctor {
     }
 
     public String getName() {
-        return name;
+        return "dr. "+name;
     }
 
     public void setName(String name) {
@@ -23,5 +23,10 @@ public class Doctor {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    @Override
+    public String toString(){
+        return "dr. "+this.name;
     }
 }

@@ -10,6 +10,8 @@ public class MainPresenter {
     public MainPresenter(MainUI ui){
         this.ui = ui;
         this.doctorList = new ArrayList<>();
+        this.doctorList.add(new Doctor("Doktah", "Originium"));
+        this.doctorList.add(new Doctor("Cipto", "Kemerdekaan"));
     }
 
     public void setEtDate(int year, int month, int dayOfMonth){
@@ -38,6 +40,10 @@ public class MainPresenter {
 
     public void updateDoctorList() {
         this.ui.updateDoctorList(this.doctorList);
+    }
+
+    public ArrayList<Doctor> getDoctorList() {
+        return this.doctorList;
     }
 
     public interface MainUI{
