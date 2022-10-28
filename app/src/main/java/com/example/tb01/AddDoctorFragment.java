@@ -31,6 +31,14 @@ public class AddDoctorFragment extends Fragment {
         this.binding = FragmentAddDoctorBinding.inflate(inflater,container,false);
         this.manager = getParentFragmentManager();
 
+        this.binding.btnAdd.setOnClickListener(this::onAddClick);
+
         return binding.getRoot();
+    }
+
+    private void onAddClick(View view){
+        String name = this.binding.etDoctorName.getText().toString();
+        String specialization = this.binding.etDoctorSpec.getText().toString();
+        this.presenter.addDoctorData(name, specialization);
     }
 }

@@ -12,6 +12,11 @@
     <!--  Appointment  -->
     <string name="appoint_title">Buat Pertemuan</string>
 
+    <!--    Doctor page-->
+    <string name="title_left_text">Daftar Dokter</string>
+    <string name="title_right_text">Spesialisasi</string>
+    <string name="tv_spec_text">Spesialisasi: </string>
+
     <!--    Add Doctor-->
     <string name="add_title_text">Tambah Dokter</string>
 </resources>

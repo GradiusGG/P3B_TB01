@@ -1,5 +1,6 @@
 package com.example.tb01;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,8 @@ public class DoctorListAdapter extends BaseAdapter {
             String name = this.presenter.getDoctorName(idx);
             String specialization = this.presenter.getDoctorSpec(idx);
             this.tvName.setText(name);
-            this.tvSpecialization.setText(specialization);
+            this.tvSpecialization.setText(String.format("%s%s", this.presenter.getMainUIContext()
+                    .getString(R.string.tv_spec_text), specialization));
         }
     }
 
@@ -76,11 +78,8 @@ public class DoctorListAdapter extends BaseAdapter {
     }
 
     public void addLine(ArrayList<Doctor> listDoctor) {
+        Log.d("debug", "DoctorListAdapter");
         this.doctorList = listDoctor;
         this.notifyDataSetChanged();
-    }
-
-    public void addDoctor(String name, String specialization) {
-        this.presenter.addDoctorData(name, specialization);
     }
 }

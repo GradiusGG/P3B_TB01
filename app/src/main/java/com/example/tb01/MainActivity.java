@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -108,6 +109,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     }
 
     @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
     public void setAppointmentDate(String text) {
         AppointmentFragment fragment = (AppointmentFragment) this.fragments.get("pertemuan");
         fragment.setEtDate(text);
@@ -121,7 +127,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
 
     @Override
     public void updateDoctorList(ArrayList<Doctor> doctors) {
+        Log.d("debug", "Main");
         DoctorFragment fragment = (DoctorFragment) this.fragments.get("dokter");
-        fragment.updateDoctorList(doctors);
+        if(fragment != null){
+            fragment.updateDoctorList(doctors);
+        }
     }
 }

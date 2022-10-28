@@ -1,17 +1,20 @@
 package com.example.tb01;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class MainPresenter {
     private MainUI ui;
-    public static String[] navMenuArray = {"Home", "Pertemuan", "Dokter", "Exit"};
+    private RSCepatKembaliDBHelper DBHelper;
     private ArrayList<Doctor> doctorList;
+    public static String[] navMenuArray = {"Home", "Pertemuan", "Dokter", "Exit"};
 
     public MainPresenter(MainUI ui){
         this.ui = ui;
-        this.doctorList = new ArrayList<>();
-        this.doctorList.add(new Doctor("Doktah", "Originium"));
-        this.doctorList.add(new Doctor("Cipto", "Kemerdekaan"));
+        this.DBHelper = new RSCepatKembaliDBHelper(this.ui.getContext());
+        this.doctorList = this.DBHelper.getAllDoctors();
     }
 
     public void setEtDate(int year, int month, int dayOfMonth){
@@ -26,8 +29,16 @@ public class MainPresenter {
 
     //Doctor
     public void addDoctorData(String name, String specialization) {
-        this.doctorList.add(new Doctor(name, specialization));
+        long id = this.DBHelper.insertDoctor(name, specialization);
+        if(id > -1){
+            Doctor d = this.DBHelper.getDoctorData(id);
+            this.doctorList.add(d);
+            this.ui.updateDoctorList(this.doctorList);
+        }
+    }
 
+    public Context getMainUIContext(){
+        return this.ui.getContext();
     }
 
     public String getDoctorName(int idx){
@@ -47,6 +58,8 @@ public class MainPresenter {
     }
 
     public interface MainUI{
+        Context getContext();
+
         void setAppointmentDate(String text);
 
         void setAppointmentTime(String text);
