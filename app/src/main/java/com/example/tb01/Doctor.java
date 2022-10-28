@@ -5,11 +5,13 @@ import java.io.Serializable;
 public class Doctor implements Serializable {
     private String name;
     private String specialization;
+    private String phone;
     private long id;
 
-    public Doctor(long id, String name, String specialization){
+    public Doctor(long id, String name, String specialization, String phone){
         this.name = name;
         this.specialization = specialization;
+        this.phone = phone;
         this.id = id;
     }
 
@@ -39,6 +41,6 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString(){
-        return "dr. "+this.name;
+        return String.format("%d. dr. %s", this.id, this.name);
     }
 }

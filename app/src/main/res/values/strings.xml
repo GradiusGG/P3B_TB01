@@ -19,4 +19,8 @@
 
     <!--    Add Doctor-->
     <string name="add_title_text">Tambah Dokter</string>
+
+    <!--    Appointments list-->
+    <string name="appoint_list_title">List Pertemuan</string>
+    <string name="tv_time_text">"Waktu: "</string>
 </resources>

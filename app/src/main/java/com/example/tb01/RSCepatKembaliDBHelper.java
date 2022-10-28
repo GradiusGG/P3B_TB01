@@ -22,7 +22,8 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
         String doctorStatement = "CREATE TABLE IF NOT EXISTS doctor (" +
                 "id_doctor INTEGER PRIMARY KEY," +
                 "name TEXT NOT NULL," +
-                "specialization TEXT NOT NULL);";
+                "specialization TEXT NOT NULL," +
+                "phone TEXT NOT NULL);";
 
         // Statement create tabel pertemuan
         String appointStatement = "CREATE TABLE IF NOT EXISTS appointment(" +
@@ -44,13 +45,15 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
         this.onCreate(sqLiteDatabase);
     }
 
-    public long insertDoctor(String name, String specialization) {
+    // ============================================================================================
+    public long insertDoctor(String name, String specialization, String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Konten yang akan di-insert ke DB
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("specialization", specialization);
+        values.put("phone", phone);
 
         return db.insert("doctor", null, values);
     }
@@ -67,7 +70,8 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
                 res.moveToFirst();
                 String name = res.getString(1);
                 String specialization = res.getString(2);
-                doctor = new Doctor(id, name, specialization);
+                String phone = res.getColumnName(3);
+                doctor = new Doctor(id, name, specialization, phone);
             }
         }
 
@@ -86,11 +90,28 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
                 long id = res.getLong(0);
                 String name = res.getString(1);
                 String specialization = res.getString(2);
-                doctors.add(new Doctor(id, name, specialization));
+                String phone = res.getString(3);
+                doctors.add(new Doctor(id, name, specialization, phone));
                 res.moveToNext();
             }
         }
 
         return doctors;
+    }
+    // ============================================================================================
+
+    public long insertAppointment(String patientName, String complaints, String date, String time,
+                                  int doctorId){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Konten yang akan di-insert ke DB
+        ContentValues values = new ContentValues();
+        values.put("patient_name", patientName);
+        values.put("complaints", complaints);
+        values.put("date", date);
+        values.put("time", time);
+        values.put("id_doctor", doctorId);
+
+        return db.insert("appointment", null, values);
     }
 }

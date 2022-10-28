@@ -36,7 +36,7 @@ public class DoctorListAdapter extends BaseAdapter {
             String name = this.presenter.getDoctorName(idx);
             String specialization = this.presenter.getDoctorSpec(idx);
             this.tvName.setText(name);
-            this.tvSpecialization.setText(String.format("%s%s", this.presenter.getMainUIContext()
+            this.tvSpecialization.setText(String.format("%s %s", this.presenter.getMainUIContext()
                     .getString(R.string.tv_spec_text), specialization));
         }
     }

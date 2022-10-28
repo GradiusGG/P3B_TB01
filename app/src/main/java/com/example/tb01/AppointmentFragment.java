@@ -26,9 +26,10 @@ public class AppointmentFragment extends Fragment {
     private String[] doctorNames = {"Doctor1", "Doctor2", "Doctor3"};
     private MainPresenter presenter;
 
-    public AppointmentFragment(){}
+    public AppointmentFragment() {
+    }
 
-    public static AppointmentFragment newInstance(MainPresenter presenter){
+    public static AppointmentFragment newInstance(MainPresenter presenter) {
         AppointmentFragment fragment = new AppointmentFragment();
         fragment.presenter = presenter;
         return fragment;
@@ -50,11 +51,12 @@ public class AppointmentFragment extends Fragment {
         // Listeners
         this.binding.etDate.setOnClickListener(this::onDateClick);
         this.binding.etTime.setOnClickListener(this::onTimeClick);
+        this.binding.btnSave.setOnClickListener(this::onSaveClick);
 
         return view;
     }
 
-    private void onDateClick(View view){
+    private void onDateClick(View view) {
         Calendar calendar = Calendar.getInstance();
         int currYear = calendar.get(Calendar.YEAR);
         int currMonth = calendar.get(Calendar.MONTH);
@@ -65,11 +67,11 @@ public class AppointmentFragment extends Fragment {
         dialog.show();
     }
 
-    private void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
+    private void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         this.presenter.setEtDate(year, month, dayOfMonth);
     }
 
-    private void onTimeClick(View view){
+    private void onTimeClick(View view) {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -79,15 +81,27 @@ public class AppointmentFragment extends Fragment {
         dialog.show();
     }
 
-    private void onTimeSet(TimePicker view, int hourOfDay, int minute){
+    private void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         this.presenter.setEtTime(hourOfDay, minute);
     }
 
-    public void setEtDate(String text){
+    public void onSaveClick(View view) {
+        String name = this.binding.etPatientName.getText().toString();
+        String complaints = this.binding.etComplaint.getText().toString();
+        String date = this.binding.etDate.getText().toString();
+        String time = this.binding.etTime.getText().toString();
+        String doctor = this.binding.spinnerDoctor.getSelectedItem().toString();
+
+        int idDoctor = Integer.parseInt(doctor.substring(0, doctor.indexOf(".")));
+
+        this.presenter.saveAppointment(name, complaints, date, time, idDoctor);
+    }
+
+    public void setEtDate(String text) {
         this.binding.etDate.setText(text);
     }
 
-    public void setEtTime(String text){
+    public void setEtTime(String text) {
         this.binding.etTime.setText(text);
     }
 }

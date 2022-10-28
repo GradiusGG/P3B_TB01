@@ -17,6 +17,8 @@ import com.example.tb01.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements MainPresenter.MainUI {
     private ActivityMainBinding binding;
@@ -70,17 +72,51 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         try {
             ft.replace(this.binding.fragmentContainer.getId(), this.fragments.get(page));
+            if(!page.equals("home")){
+                ft.addToBackStack(null);
+            }
         } catch (NullPointerException e) {
             new AlertDialog.Builder(this)
                     .setTitle("Halaman Tidak Ditemukan")
                     .setMessage("Halaman yang di-request tidak ditemukan.")
                     .setPositiveButton("OK", null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIcon(android.R.drawable.ic_dialog_info)
                     .show();
         }
-
         ft.commit();
+    }
 
+//    public void changePage(String page) {
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+//
+//        Fragment fragment = this.fragments.get(page);
+//        if (fragment == null) {
+//            new AlertDialog.Builder(this)
+//                    .setTitle("Halaman Tidak Ditemukan")
+//                    .setMessage("Halaman yang di-request tidak ditemukan.")
+//                    .setPositiveButton("OK", null)
+//                    .setIcon(android.R.drawable.ic_dialog_alert)
+//                    .show();
+//        } else {
+//            if (fragment.isAdded()) {
+//                ft.show(fragment);
+//            } else {
+//                ft.add(this.binding.fragmentContainer.getId(), fragment);
+//                if (!page.equals("home")){
+//                    ft.addToBackStack(null);
+//                }
+//            }
+//
+//            for (Map.Entry<String, Fragment> fragmentEntry : fragments.entrySet()) {
+//                if(!fragmentEntry.getKey().equals(page)){
+//                    ft.hide(fragmentEntry.getValue());
+//                }
+//            }
+//
+//
+//        }
+//        ft.commit();
 //        Fragment fragmentHome = this.fragments.get("home");
 //        Fragment fragmentAppointment = this.fragments.get("pertemuan");
 //        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -105,8 +141,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
 //                ft.hide(fragmentHome);
 //            }
 //        }
-
-    }
+//    }
 
     @Override
     public Context getContext() {
@@ -129,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     public void updateDoctorList(ArrayList<Doctor> doctors) {
         Log.d("debug", "Main");
         DoctorFragment fragment = (DoctorFragment) this.fragments.get("dokter");
-        if(fragment != null){
+        if (fragment != null) {
             fragment.updateDoctorList(doctors);
         }
     }

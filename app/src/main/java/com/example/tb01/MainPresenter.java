@@ -17,8 +17,19 @@ public class MainPresenter {
         this.doctorList = this.DBHelper.getAllDoctors();
     }
 
+    //Appointment
+    public void saveAppointment(String patientName, String complaints, String date, String time,
+                                int doctorId){
+        long id = this.DBHelper.insertAppointment(patientName, complaints, date, time, doctorId);
+        if(id > -1){
+            Doctor d = this.DBHelper.getDoctorData(id);
+            this.doctorList.add(d);
+            this.ui.updateDoctorList(this.doctorList);
+        }
+    }
+
     public void setEtDate(int year, int month, int dayOfMonth){
-        String dateString = String.format("%02d/$02d/%04d", dayOfMonth, month, year);
+        String dateString = String.format("%02d/%02d/%04d", dayOfMonth, month, year);
         this.ui.setAppointmentDate(dateString);
     }
     
@@ -28,8 +39,8 @@ public class MainPresenter {
     }
 
     //Doctor
-    public void addDoctorData(String name, String specialization) {
-        long id = this.DBHelper.insertDoctor(name, specialization);
+    public void addDoctorData(String name, String specialization, String phone) {
+        long id = this.DBHelper.insertDoctor(name, specialization, phone);
         if(id > -1){
             Doctor d = this.DBHelper.getDoctorData(id);
             this.doctorList.add(d);
