@@ -3,6 +3,7 @@ package com.example.tb01;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,19 +42,9 @@ public class AddDoctorFragment extends Fragment {
     private void onAddClick(View view){
         String name = this.binding.etDoctorName.getText().toString();
         String specialization = this.binding.etDoctorSpec.getText().toString();
-        String phone = this.binding.etDoctorName.getText().toString();
+        String phone = this.binding.etDoctorPhone.getText().toString();
         this.presenter.addDoctorData(name, specialization, phone);
-        new AlertDialog.Builder(this.getContext())
-                .setTitle("Data Berhasil Ditambahkan")
-                .setMessage("Data dokter berhasil ditambahkan ke basis data.")
-                .setPositiveButton("OK", this::onDialogOKClick)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
     }
 
-    private void onDialogOKClick(DialogInterface dialogInterface, int i) {
-        Bundle result = new Bundle();
-        result.putString("page", "dokter");
-        this.manager.setFragmentResult("changePage", result);
-    }
+
 }

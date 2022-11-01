@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="title_size">36sp</dimen>
+    <dimen name="subtitle_size">24sp</dimen>
     <dimen name="desc_text_size">30sp</dimen>
     <dimen name="btn_text_size">24sp</dimen>
     <dimen name="form_font_size">20sp</dimen>
@@ -15,5 +16,8 @@
     <dimen name="item_text_size">18sp</dimen>
     <dimen name="list_item_padding">15dp</dimen>
 
-
+    <!--    Appointment Dialog-->
+    <dimen name="appoin_btn_width">220dp</dimen>
+    <dimen name="appoin_btn_height">54dp</dimen>
+    <dimen name="appoin_tv_padding">3dp</dimen>
 </resources>

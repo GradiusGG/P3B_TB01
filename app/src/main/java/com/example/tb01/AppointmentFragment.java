@@ -68,7 +68,7 @@ public class AppointmentFragment extends Fragment {
     }
 
     private void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        this.presenter.setEtDate(year, month, dayOfMonth);
+        this.presenter.setEtDate(year, month+1, dayOfMonth);
     }
 
     private void onTimeClick(View view) {
@@ -94,7 +94,7 @@ public class AppointmentFragment extends Fragment {
 
         int idDoctor = Integer.parseInt(doctor.substring(0, doctor.indexOf(".")));
 
-        this.presenter.saveAppointment(name, complaints, date, time, idDoctor);
+        this.presenter.addAppointmentData(name, date, time, complaints, idDoctor);
     }
 
     public void setEtDate(String text) {

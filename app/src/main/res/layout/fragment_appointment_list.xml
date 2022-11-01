@@ -6,23 +6,56 @@
     <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="@dimen/list_item_padding">
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
+            android:padding="@dimen/list_item_padding"
             android:text="@string/appoint_list_title"
             android:textSize="@dimen/title_size" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:background="?colorPrimary"
+            android:orientation="horizontal"
+            android:padding="@dimen/list_item_padding"
+            android:paddingVertical="@dimen/list_item_padding"
+            android:weightSum="20">
 
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:text="TANGGAL"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="7"
+                android:text="DOKTER"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="7"
+                android:text="PASIEN"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/list_doctor"
+        android:id="@+id/list_appointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_title" />

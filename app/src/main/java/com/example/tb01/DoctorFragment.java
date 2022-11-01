@@ -26,6 +26,7 @@ public class DoctorFragment extends Fragment {
     public static DoctorFragment newInstance(MainPresenter presenter) {
         DoctorFragment fragment = new DoctorFragment();
         fragment.presenter = presenter;
+        fragment.adapter = new DoctorListAdapter(presenter);
         return fragment;
     }
 
@@ -36,7 +37,6 @@ public class DoctorFragment extends Fragment {
         this.manager = getParentFragmentManager();
 
         // Atur & populate listview
-        this.adapter = new DoctorListAdapter(this.presenter);
         this.binding.listDoctor.setAdapter(this.adapter);
         this.presenter.updateDoctorList();
 

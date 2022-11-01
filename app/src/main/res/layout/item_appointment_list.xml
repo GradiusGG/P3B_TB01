@@ -2,19 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:weightSum="20"
     android:padding="@dimen/list_item_padding">
 
     <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_date"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/item_text_size" />
+        android:layout_gravity="center_vertical"
+        android:layout_weight="6"
+        android:paddingEnd="@dimen/list_item_padding"/>
 
     <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_doctor"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:text="@string/tv_time_text"
-        android:textSize="@dimen/item_text_size" />
+        android:layout_gravity="center_vertical"
+        android:layout_weight="7"
+        android:paddingEnd="@dimen/list_item_padding"/>
+
+    <TextView
+        android:id="@+id/tv_patient"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="7"/>
+
+
 </LinearLayout>

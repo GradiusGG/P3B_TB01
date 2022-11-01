@@ -35,7 +35,8 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
                 "id_doctor INTEGER NOT NULL," +
                 "FOREIGN KEY(id_doctor) REFERENCES doctor(id_doctor));";
 
-        sqLiteDatabase.execSQL(doctorStatement + appointStatement);
+        sqLiteDatabase.execSQL(doctorStatement);
+        sqLiteDatabase.execSQL(appointStatement);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
                 res.moveToFirst();
                 String name = res.getString(1);
                 String specialization = res.getString(2);
-                String phone = res.getColumnName(3);
+                String phone = res.getString(3);
                 doctor = new Doctor(id, name, specialization, phone);
             }
         }
@@ -101,7 +102,7 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
     // ============================================================================================
 
     public long insertAppointment(String patientName, String complaints, String date, String time,
-                                  int doctorId){
+                                  long doctorId){
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Konten yang akan di-insert ke DB
@@ -113,5 +114,66 @@ public class RSCepatKembaliDBHelper extends SQLiteOpenHelper {
         values.put("id_doctor", doctorId);
 
         return db.insert("appointment", null, values);
+    }
+
+    public ArrayList<Appointment> getAllAppointments() {
+        ArrayList<Appointment> appointments = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        try (Cursor res = db.rawQuery("select * from appointment", null)) {
+
+            // Iterasi untuk mengisi ArrayList dengan data dari DB
+            res.moveToFirst();
+            while (!res.isAfterLast()) {
+                long idAppointment = res.getLong(0);
+                String patientName = res.getString(1);
+                String complaints = res.getString(2);
+                String date = res.getString(3);
+                String time = res.getString(4);
+                long idDoctor = res.getLong(5);
+
+                Doctor currDoctor = getDoctorData(idDoctor);
+                String doctorName = currDoctor.getName();
+
+                appointments.add(new Appointment(patientName, doctorName, date, time,
+                        complaints, idAppointment, idDoctor));
+                res.moveToNext();
+            }
+        }
+
+        return appointments;
+    }
+
+    public Appointment getAppointmentData(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Appointment appointment = null;
+
+        // Ambil row dari DB
+        try (Cursor res = db.rawQuery("SELECT * " +
+                "FROM appointment " +
+                "WHERE id_appointment =" + id + "",
+                null)) {
+
+            //Buat object Doctor yang akan dikembalikan
+            if (res != null) {
+                res.moveToFirst();
+                long idAppointment = res.getLong(0);
+                String patientName = res.getString(1);
+                String complaints = res.getString(2);
+                String date = res.getString(3);
+                String time = res.getString(4);
+                long idDoctor = res.getLong(5);
+
+                Log.d("debug", ""+idDoctor);
+
+                Doctor currDoctor = getDoctorData(idDoctor);
+                String doctorName = currDoctor.getName();
+
+                appointment = new Appointment(patientName, doctorName, date, time, complaints,
+                        idAppointment, idDoctor);
+            }
+        }
+
+        return appointment;
     }
 }

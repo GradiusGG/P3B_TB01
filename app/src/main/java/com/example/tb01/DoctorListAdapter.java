@@ -78,7 +78,6 @@ public class DoctorListAdapter extends BaseAdapter {
     }
 
     public void addLine(ArrayList<Doctor> listDoctor) {
-        Log.d("debug", "DoctorListAdapter");
         this.doctorList = listDoctor;
         this.notifyDataSetChanged();
     }

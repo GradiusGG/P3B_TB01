@@ -3,6 +3,7 @@ package com.example.tb01;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         this.fragments.put("pertemuan", AppointmentFragment.newInstance(this.presenter));
         this.fragments.put("dokter", DoctorFragment.newInstance(this.presenter));
         this.fragments.put("add", AddDoctorFragment.newInstance(this.presenter));
+        this.fragments.put("daftar pertemuan", AppointmentListFragment.newInstance(this.presenter));
 
         // Drawer
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.binding.drawerLayout,
@@ -162,10 +165,56 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
 
     @Override
     public void updateDoctorList(ArrayList<Doctor> doctors) {
-        Log.d("debug", "Main");
         DoctorFragment fragment = (DoctorFragment) this.fragments.get("dokter");
         if (fragment != null) {
             fragment.updateDoctorList(doctors);
         }
+    }
+
+    @Override
+    public void updateAppointmentList(ArrayList<Appointment> appointmentList) {
+        AppointmentListFragment fragment = (AppointmentListFragment) this.fragments.get("daftar pertemuan");
+        if (fragment != null) {
+            fragment.updateAppointmentList(appointmentList);
+        }
+    }
+
+    @Override
+    public void showAlertAddDoctorDialog(String title, String message, int iconId) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", this::onDialogAddDoctorClick)
+                .setIcon(iconId)
+                .show();
+    }
+
+    @Override
+    public void showAlertAddAppointmentDialog(String title, String message, int iconId) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", this::onDialogAddAppointmentClick)
+                .setIcon(iconId)
+                .show();
+    }
+
+    @Override
+    public void showAppointMentDialog(int i) {
+        DialogFragment fragment = AppointmentDialogFragment.newInstance(this.presenter, i);
+        FragmentTransaction transaction = this.manager.beginTransaction();
+        fragment.show(transaction, "detail pertemuan");
+    }
+
+    private void onDialogAddAppointmentClick(DialogInterface dialogInterface, int i) {
+        Bundle result = new Bundle();
+        result.putString("page", "daftar pertemuan");
+        this.manager.setFragmentResult("changePage", result);
+    }
+
+    private void onDialogAddDoctorClick(DialogInterface dialogInterface, int i) {
+        Bundle result = new Bundle();
+        result.putString("page", "dokter");
+        this.manager.setFragmentResult("changePage", result);
     }
 }
