@@ -18,7 +18,6 @@ import com.example.tb01.databinding.FragmentAddDoctorBinding;
 public class AddDoctorFragment extends Fragment {
     private MainPresenter presenter;
     private FragmentAddDoctorBinding binding;
-    private FragmentManager manager;
 
     public AddDoctorFragment(){}
 
@@ -32,7 +31,6 @@ public class AddDoctorFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         this.binding = FragmentAddDoctorBinding.inflate(inflater,container,false);
-        this.manager = getParentFragmentManager();
 
         this.binding.btnAdd.setOnClickListener(this::onAddClick);
 
