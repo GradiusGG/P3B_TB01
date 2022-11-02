@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -204,6 +206,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         DialogFragment fragment = AppointmentDialogFragment.newInstance(this.presenter, i);
         FragmentTransaction transaction = this.manager.beginTransaction();
         fragment.show(transaction, "detail pertemuan");
+    }
+
+    @Override
+    public void startCallActivity(Uri telUri) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, telUri);
+        startActivity(intent);
     }
 
     private void onDialogAddAppointmentClick(DialogInterface dialogInterface, int i) {

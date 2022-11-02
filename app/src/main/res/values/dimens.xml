@@ -6,6 +6,7 @@
     <dimen name="btn_text_size">24sp</dimen>
     <dimen name="form_font_size">20sp</dimen>
     <dimen name="form_vg_padding">25dp</dimen>
+    <dimen name="btn_close_wid">20dp</dimen>
 
     <!--    Navigator-->
     <dimen name="nav_text_size">20sp</dimen>
@@ -20,4 +21,6 @@
     <dimen name="appoin_btn_width">220dp</dimen>
     <dimen name="appoin_btn_height">54dp</dimen>
     <dimen name="appoin_tv_padding">3dp</dimen>
+
+
 </resources>

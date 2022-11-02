@@ -44,17 +44,19 @@ public class AppointmentDialogFragment extends DialogFragment {
         this.binding.tvComplaints.setText(this.presenter.getAppointmentComplaints(idAppointment));
         this.binding.tvPhone.setText(this.presenter.getAppointmentDoctorPhone(idAppointment));
 
+        this.binding.btnCall.setOnClickListener(this::onCallClick);
+        this.binding.btnClose.setOnClickListener(this::onCloseClick);
+
         return binding.getRoot();
+    }
+
+    private void onCloseClick(View view) {
+        this.dismiss();
     }
 
     private void onCallClick(View view){
         Bundle args = this.getArguments();
         int idAppointment = args.getInt("idAppointment");
-
-        String number = this.presenter.getAppointmentDoctorPhone(idAppointment);
-
-        String telUri = "tel:" + number.trim() ;
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(telUri));
-        startActivity(intent);
+        this.presenter.makeCall(idAppointment);
     }
 }

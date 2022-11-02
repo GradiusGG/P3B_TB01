@@ -3,6 +3,8 @@ package com.example.tb01;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -138,6 +140,12 @@ public class MainPresenter {
         this.ui.showAppointMentDialog(i);
     }
 
+    public void makeCall(int idAppointment) {
+        String number = this.getAppointmentDoctorPhone(idAppointment);
+        Uri telUri = Uri.parse("tel:" + number.trim());
+        this.ui.startCallActivity(telUri);
+    }
+
     // =============================================================================================
 
     public interface MainUI{
@@ -156,5 +164,7 @@ public class MainPresenter {
         void showAlertAddAppointmentDialog(String title, String message, int iconId);
 
         void showAppointMentDialog(int i);
+
+        void startCallActivity(Uri telUri);
     }
 }
